@@ -1,0 +1,55 @@
+package main
+
+import (
+	"fmt"
+	"math"
+	"strings"
+)
+
+func main() {
+	message := "Hello, World!"
+	reversed := reverseString(message)
+	uppercase := convertToUppercase(message)
+	isPalindrome := checkPalindrome(message)
+
+	fmt.Println("Исходное сообщение:", message)
+	fmt.Println("Реверсивное сообщение:", reversed)
+	fmt.Println("Сообщение в верхнем регистре:", uppercase)
+
+	if isPalindrome {
+		fmt.Println("Сообщение является палиндромом!")
+	} else {
+		fmt.Println("Сообщение не является палиндромом.")
+	}
+}
+
+func reverseString(str string) string {
+	runes := []rune(str)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+
+func convertToUppercase(str string) string {
+	return strings.ToUpper(str)
+}
+
+func checkPalindrome(str string) bool {
+	str = strings.ToLower(str)
+	runes := []rune(str)
+	length := len(runes)
+	for i := 0; i < length/2; i++ {
+		if runes[i] != runes[length-1-i] {
+			return false
+		}
+	}
+	return true
+}
+
+func calculateSqrt(num float64) (float64, error) {
+	if num < 0 {
+		return 0, fmt.Errorf("невозможно вычислить квадратный корень из отрицательного числа")
+	}
+	return math.Sqrt(num), nil
+}
